@@ -54,8 +54,10 @@ public class EmployeeServiceImpl implements Employeeservice {
     }
 
 
-    //@CircuitBreaker(name="${spring.application.name}", fallbackMethod = "getDefaultDepartment")
+//    this @Retry and @CircuitBreaker annotations order matter here that which will be trigger first
+//    Best practice and recommended is first Retry and the CircuitBreaker if configuring both.
     @Retry(name="${spring.application.name}", fallbackMethod = "getDefaultDepartment")
+    //@CircuitBreaker(name="${spring.application.name}", fallbackMethod = "getDefaultDepartment")
     @Override
     public ApiResponseDto getEmployeeById(Long employeeId) {
 
